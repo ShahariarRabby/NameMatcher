@@ -1,8 +1,3 @@
-myFile = open('Name.txt')
-lists = myFile.read().split()
-myFile.close()
-
-
 def replay():
     # type: () -> Boolean
     """
@@ -14,7 +9,7 @@ def replay():
 
     elif option.startswith('A'):
         print lists
-        replay()
+        return True
 
     else:
         return False
@@ -23,6 +18,10 @@ def replay():
 start = True
 
 while start:
+    myFile = open('Name.txt')
+    lists = myFile.read().split()
+    myFile.close()
+
     name = raw_input('Input your name: ')
 
     for l in lists:
@@ -30,9 +29,10 @@ while start:
             print 'Name Found!!'
             break
     else:
-        myFile1 = open('Name.txt', 'a')
-        myFile1.write(' ' + name)
-        myFile1.close()
-        print 'Not Found! Name added'
+        print 'Not Found!'
+        if raw_input('Do you wanna add the name?(y/n)').upper().startswith('Y'):
+            myFile1 = open('Name.txt', 'a')
+            myFile1.write(' ' + name)
+            myFile1.close()
 
     start = replay()
